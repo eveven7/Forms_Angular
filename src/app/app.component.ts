@@ -7,14 +7,19 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  @ViewChild('otherForm', { static: false }) otherForm: NgForm;
+
   @ViewChild('f') signupForm: NgForm;
   defaultQuestion = 'pet';
   answer = '';
   genders = ['male', 'female'];
-
+  subscriptions = ['basic', 'advanced', 'pro'];
+  selectedSubscription = 'advanced';
   submittedForm = false;
   user = {
     username: '',
+    password: '',
+
     email: '',
     secretQuestion: '',
     answer: '',
@@ -44,6 +49,10 @@ export class AppComponent {
   // onSubmit(form: NgForm) {
   //   console.log(form);
   // }
+  onSubmitSign() {
+    console.log(this.otherForm.value);
+    this.otherForm.reset();
+  }
   onSubmit() {
     this.submittedForm = true;
     this.user.username = this.signupForm.value.userData.username;
@@ -51,6 +60,6 @@ export class AppComponent {
     this.user.secretQuestion = this.signupForm.value.secret;
     this.user.answer = this.signupForm.value.questionAnswer;
     this.user.gender = this.signupForm.value.gender;
-    this.signupForm.reset()
+    this.signupForm.reset();
   }
 }

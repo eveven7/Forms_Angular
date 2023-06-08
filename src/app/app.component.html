@@ -83,3 +83,69 @@
     </div>
   </div>
 </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <h4>Other form</h4>
+      <form (ngSubmit)="onSubmitSign()" #otherForm="ngForm">
+        <div id="otherData" ngModelGroup="otherData" #otherData="ngModelGroup">
+          <div class="form-group">
+            <label for="email">Mail</label>
+            <input
+              type="email"
+              id="email"
+              class="form-control"
+              ngModel
+              name="email"
+              required
+              email
+              #email="ngModel"
+            />
+            <span class="help-block" *ngIf="!email.valid && email.touched">
+              Please enter a valid email
+            </span>
+          </div>
+        </div>
+        <p *ngIf="!otherData.valid && otherData.touched">
+          User data is invalid
+        </p>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            class="form-control"
+            ngModel
+            name="password"
+            required
+            #password="ngModel"
+          />
+          <span class="help-block" *ngIf="!password.valid && password.touched">
+            Please enter a valid password
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="subscription"> Choose a subscription</label>
+          <select
+            name="subscription"
+            id="subscription"
+            class="form-control"
+            [ngModel]="selectedSubscription"
+          >
+            <option
+              value="subscription"
+              *ngFor="let subscription of subscriptions"
+            >
+              {{ subscription }}
+            </option>
+          </select>
+        </div>
+        <p *ngIf="!otherForm.valid && otherForm.touched">Form is invalid</p>
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
